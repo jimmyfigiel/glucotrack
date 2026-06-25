@@ -42,6 +42,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'static'],
         'APP_DIRS': True,
         'OPTIONS': {'context_processors': [
+            'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
         ]},
@@ -65,9 +66,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Serve index.html for unknown files (SPA support)
-WHITENOISE_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
