@@ -9,7 +9,6 @@ env/
 # Django
 backend/glucotrack.db
 backend/staticfiles/
-backend/static/
 .env
 
 # Node
