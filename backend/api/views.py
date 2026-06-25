@@ -3,6 +3,7 @@ import requests
 from datetime import date, timedelta
 from django.db.models import Sum, F
 from django.db.models.functions import TruncDate
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,6 +14,7 @@ from .serializers import TargetsSerializer, FoodSerializer, MealLogSerializer
 
 # ── Targets ──────────────────────────────────────────────────────────────────
 
+@csrf_exempt
 @api_view(['GET', 'PUT'])
 def targets(request):
     obj, _ = Targets.objects.get_or_create(pk=1)
@@ -26,6 +28,7 @@ def targets(request):
 
 # ── Foods ─────────────────────────────────────────────────────────────────────
 
+@csrf_exempt
 @api_view(['GET', 'POST'])
 def foods(request):
     if request.method == 'GET':
@@ -87,6 +90,7 @@ def barcode_lookup(request, code):
 
 # ── Meals ─────────────────────────────────────────────────────────────────────
 
+@csrf_exempt
 @api_view(['GET', 'POST'])
 def meals(request):
     if request.method == 'GET':
@@ -109,6 +113,7 @@ def meals(request):
     return Response(MealLogSerializer(meal).data, status=status.HTTP_201_CREATED)
 
 
+@csrf_exempt
 @api_view(['PUT', 'DELETE'])
 def meal_detail(request, pk):
     try:
@@ -251,6 +256,7 @@ def search_off(term):
     }
 
 
+@csrf_exempt
 @api_view(['POST'])
 def parse_meal(request):
     text = request.data.get('text', '').strip()
