@@ -1,0 +1,13 @@
+{
+  "name": "glucotrack",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"cd backend && python manage.py runserver\" \"cd client && npm run dev\"",
+    "start": "concurrently \"cd backend && python manage.py runserver\" \"cd client && npm run preview\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0"
+  }
+}

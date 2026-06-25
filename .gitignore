@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Django
+backend/glucotrack.db
+backend/staticfiles/
+backend/static/
+.env
+
+# Node
+node_modules/
+client/node_modules/
+server/node_modules/
+client/dist/
+
+# SQLite
+*.db
+
+# Environment
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db

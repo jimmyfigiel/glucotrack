@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\jimmy\\\\OneDrive\\\\Documents\\\\FoodTracker\\\\server\\\\routes\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\jimmy\\\\OneDrive\\\\Documents\\\\FoodTracker\\\\client\\\\src\\\\pages\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\jimmy\\\\OneDrive\\\\Documents\\\\FoodTracker\\\\client\\\\src\\\\components\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\jimmy\\\\OneDrive\\\\Documents\\\\FoodTracker\\\\client\\\\src\\\\hooks\")",
+      "Bash(npm install *)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Read(//c/Users/jimmy/**)",
+      "Bash(ls \"/c/Users/jimmy/AppData/Local/nvs/\" 2>/dev/null || ls \"/c/Users/jimmy/.nvm/\" 2>/dev/null || ls \"/c/Users/jimmy/AppData/Roaming/nvm/\" 2>/dev/null || ls \"/c/ProgramData/nvm/\" 2>/dev/null || echo \"no nvm found\")"
+    ]
+  }
+}
