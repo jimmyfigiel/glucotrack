@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Targets(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='targets')
     net_carbs_per_meal = models.FloatField(default=30)
     net_carbs_per_day = models.FloatField(default=100)
     cholesterol_per_day = models.FloatField(default=200)
@@ -21,7 +23,7 @@ class Food(models.Model):
 
     name = models.CharField(max_length=255)
     source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default='manual')
-    barcode_code = models.CharField(max_length=50, blank=True, null=True)
+    barcode_code = models.CharField(max_length=50, blank=True, null=True, db_index=True)
     calories = models.FloatField(default=0)
     net_carbs = models.FloatField(default=0)
     total_carbs = models.FloatField(default=0)
@@ -43,6 +45,7 @@ class MealLog(models.Model):
         ('dinner', 'Dinner'), ('snack', 'Snack'),
     ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='meal_logs')
     food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='meal_logs')
     quantity = models.FloatField(default=1)
     meal_type = models.CharField(max_length=20, choices=MEAL_CHOICES, default='snack')

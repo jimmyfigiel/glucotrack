@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Download, Save } from 'lucide-react';
+import { AlertCircle, Download, Save, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import useTargets from '../hooks/useTargets.js';
-import { getMeals } from '../api.js';
+import { getMeals, logoutUser } from '../api.js';
 
 const FIELDS = [
   { key: 'net_carbs_per_meal', label: 'Net Carbs per Meal', unit: 'g', description: 'Max net carbs in a single meal' },
@@ -14,11 +15,20 @@ const FIELDS = [
 ];
 
 export default function Settings() {
+  const navigate = useNavigate();
   const { targets, updateTargets, loading } = useTargets();
   const [form, setForm] = useState(null);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
   const [exporting, setExporting] = useState(false);
+  const username = localStorage.getItem('glucotrack_username');
+
+  async function handleLogout() {
+    try { await logoutUser(); } catch (_) {}
+    localStorage.removeItem('glucotrack_token');
+    localStorage.removeItem('glucotrack_username');
+    navigate('/login');
+  }
 
   useEffect(() => {
     if (targets) setForm({ ...targets });
@@ -163,6 +173,19 @@ export default function Settings() {
         >
           <Download size={18} />
           {exporting ? 'Exporting...' : 'Export Today\'s Log (CSV)'}
+        </button>
+      </div>
+
+      {/* Account */}
+      <div className="bg-white rounded-2xl shadow-sm p-4 space-y-3">
+        <h2 className="font-semibold text-gray-800">Account</h2>
+        {username && <p className="text-sm text-gray-500">Signed in as <strong>{username}</strong></p>}
+        <button
+          onClick={handleLogout}
+          className="w-full py-3 border border-red-200 text-red-600 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-red-50 transition-colors"
+        >
+          <LogOut size={18} />
+          Sign Out
         </button>
       </div>
 
